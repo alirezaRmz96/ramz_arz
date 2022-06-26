@@ -1,9 +1,6 @@
 package com.example.ramzarz.data.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.ramzarz.data.model.TokenItem
 import kotlinx.coroutines.flow.Flow
 
@@ -21,5 +18,8 @@ interface TokenDao {
 
     @Query("SELECT * FROM token_table WHERE favorite_token = 1")
     fun getFavoriteTokens():Flow<List<TokenItem>>
+
+    @Update
+    suspend fun updateTokens(tokenItem: TokenItem)
 
 }

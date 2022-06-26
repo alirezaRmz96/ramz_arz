@@ -2,4 +2,17 @@
     <string name="app_name">ramzArz</string>
     <string name="title_favorite">علاقه مندی ها</string>
     <string name="title_token">لیست توکن ها</string>
+    <string name="favorite_screen">not adding to your favorite Token yet</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_image">btn image</string>
+    <string name="month_range_title">درصد تغییرات ماهانه</string>
+    <string name="week_range_title">درصد تغییرات هفتگی</string>
+    <string name="day_range_title">درصد تغییرات روزانه</string>
+    <string name="today_dollar">21,301 دلار</string>
+    <string name="range_per_dominance"> (%s)$</string>
+    <string name="price_bazar">%s B</string>
+    <string name="range">+%s $</string>
+    <string name="range_neg"> %s $</string>
+
 </resources>

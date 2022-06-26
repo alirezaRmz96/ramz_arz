@@ -9,4 +9,6 @@ interface TokenRepository {
     suspend fun getToken():Resource<Token>
     suspend fun getTokens(): List<TokenItem>?
     suspend fun updateTokens():List<TokenItem>?
+    fun getFavoriteToken():Flow<List<TokenItem>>
+    suspend fun update(tokenItem: TokenItem)
 }

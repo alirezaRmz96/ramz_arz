@@ -1,7 +1,8 @@
-package com.example.ramzarz.ui.Token
+package com.example.ramzarz.ui.fragments.Token
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.ramzarz.data.model.Token
 import com.example.ramzarz.data.model.TokenItem
@@ -9,6 +10,7 @@ import com.example.ramzarz.data.until.Resource
 import com.example.ramzarz.domain.useCase.GetTokenUseCase
 import com.example.ramzarz.domain.useCase.TokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,6 +36,14 @@ class TokenViewModel @Inject constructor(
         val tokenList = tokenUseCase.getTokensUseCase.execute()
         tokensLiveData.postValue(tokenList)
     }
+//    fun getTok() = liveData {
+//        val tok = tokenUseCase.getTokensUseCase.execute()
+//        emit(tok)
+//    }
+    fun update(tokenItem: TokenItem) = viewModelScope.launch(Dispatchers.IO) {
+        tokenUseCase.updateUseCase.execute(tokenItem)
+    }
+
     fun updateTokens() = viewModelScope.launch {
         val tokenList = tokenUseCase.updateTokenUseCase.execute()
         tokensLiveData.postValue(tokenList)

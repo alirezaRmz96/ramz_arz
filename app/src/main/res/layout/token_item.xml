@@ -1,101 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/_10sdp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
     android:layout_height="wrap_content">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/rectungle_shape"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/token_deOrIn"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_arrow_drop_up"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/ll1"
-            android:contentDescription="decrease or increase"
-            />
-        <LinearLayout
-            android:id="@+id/ll1"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toRightOf="@+id/token_deOrIn"
-            app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:id="@+id/dollar_price"
+                android:id="@+id/txtDollar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="21,301 دلار"
-                android:textSize="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
-                />
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/today_dollar"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtBit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/imgBit"
+                android:text="Bitcoin"
+                android:textSize="@dimen/_15sdp" />
+
+            <ImageView
+                android:id="@+id/imgBit"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_star_border"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/deOrIn"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="5dp"
+                android:contentDescription="decrease or increase"
+                android:src="@drawable/up" />
+
+            <ImageView
+                android:id="@+id/favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_star_border"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+
+            <TextView
+                android:id="@+id/time_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical|center|center_horizontal"
+                android:text="06:05:55"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/_15sdp" />
 
             <TextView
                 android:id="@+id/token_per_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(+0.35%)"
-                android:textSize="@dimen/_20sdp"
-                android:textColor="#8BC34A"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll2"
-            android:layout_width="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintRight_toLeftOf="@+id/favorite"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
-                android:layout_gravity="end"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/token_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bitcoin"
-                    android:textSize="@dimen/_15sdp"
-                    />
-                <ImageView
-                    android:id="@+id/token_image"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_star_border"
-                    app:layout_constraintLeft_toRightOf="@+id/token_name"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </LinearLayout>
-            <TextView
-                android:id="@+id/time_stamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="5dp"
                 android:gravity="center_vertical|center|center_horizontal"
-                android:text="06:05:55"
-                android:textSize="@dimen/_20sdp"
-                />
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/favorite"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_star_border"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:contentDescription="decrease or increase"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="@string/range_per_dominance"
+                android:textColor="#8BC34A"
+                android:textSize="@dimen/_15sdp" />
+        </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

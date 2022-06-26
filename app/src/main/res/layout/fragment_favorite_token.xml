@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.favoriteToken.TokenFavoriteFragment">
+    tools:context=".ui.fragments.favoriteToken.TokenFavoriteFragment">
 
+    <TextView
+        android:id="@+id/tv_"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/favorite_screen"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18sdp"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rl_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
