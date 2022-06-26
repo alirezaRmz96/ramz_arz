@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(tableName = "token_table")
 data class TokenItem(
@@ -43,4 +44,4 @@ data class TokenItem(
     val symbol: String?,
     val ytd: Ytd?,
     @ColumnInfo(name = "favorite_token") var favoriteToken:Boolean = false
-)
+):Serializable

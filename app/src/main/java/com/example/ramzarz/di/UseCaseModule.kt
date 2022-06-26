@@ -1,10 +1,7 @@
 package com.example.ramzarz.di
 
 import com.example.ramzarz.domain.repository.TokenRepository
-import com.example.ramzarz.domain.useCase.GetTokenUseCase
-import com.example.ramzarz.domain.useCase.GetTokensUseCase
-import com.example.ramzarz.domain.useCase.TokenUseCase
-import com.example.ramzarz.domain.useCase.UpdateTokenUseCase
+import com.example.ramzarz.domain.useCase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +17,9 @@ class UseCaseModule {
         return TokenUseCase(
             getTokenUseCase = GetTokenUseCase(repository),
             getTokensUseCase = GetTokensUseCase(repository),
-            updateTokenUseCase = UpdateTokenUseCase(repository)
+            updateTokenUseCase = UpdateTokenUseCase(repository),
+            getFavoriteTokenUseCase = GetFavoriteTokenUseCase(repository),
+            updateUseCase = UpdateUseCase(repository)
         )
     }
 }

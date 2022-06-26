@@ -1,5 +1,6 @@
 package com.example.ramzarz.data.repository
 
+import android.text.TextUtils.replace
 import android.util.Log
 import com.example.ramzarz.data.model.Token
 import com.example.ramzarz.data.model.TokenItem
@@ -9,13 +10,18 @@ import com.example.ramzarz.data.repository.dataSource.TokenRemoteDataSource
 import com.example.ramzarz.data.repository.dataSourceImpl.TokenRemoteDataSourceImpl
 import com.example.ramzarz.data.until.Resource
 import com.example.ramzarz.domain.repository.TokenRepository
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
+import java.util.*
 
 class TokenRepositoryImpl (
     private val tokenRemoteDataSource: TokenRemoteDataSource,
     private val tokenLocalDataSource: TokenLocalDataSource,
     private val tokenCacheDataSource: TokenCacheDataSource
 ) : TokenRepository{
+    private var tool :Boolean = true
+
     override suspend fun getToken(): Resource<Token> {
         return responseToResource(
             tokenRemoteDataSource.getToken()
@@ -34,6 +40,21 @@ class TokenRepositoryImpl (
         return newTokens
     }
 
+    override fun getFavoriteToken(): Flow<List<TokenItem>> {
+        return tokenLocalDataSource.getFavoriteToken()
+    }
+
+    override suspend fun update(tokenItem: TokenItem) {
+
+        tokenLocalDataSource.updateTokens(tokenItem)
+        val newTokens = getTokenFromDB()
+
+        tokenLocalDataSource.saveTokenToDB(newTokens)
+
+        tool = false
+
+    }
+
     suspend fun getTokensFromCache(): List<TokenItem> {
         lateinit var tokens : List<TokenItem>
         try {
@@ -41,7 +62,7 @@ class TokenRepositoryImpl (
         }catch (exception:Exception){
             Log.i("MyTag", exception.message.toString())
         }
-        if (tokens.size>0){
+        if (tokens.size>0 &&  tool){
             return tokens
         }
         else {

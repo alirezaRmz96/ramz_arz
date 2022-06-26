@@ -27,4 +27,12 @@ class TokenLocalDataSourceImpl(
             tokenDao.deleteAllToken()
         }
     }
+
+    override fun getFavoriteToken(): Flow<List<TokenItem>> {
+        return tokenDao.getFavoriteTokens()
+    }
+
+    override suspend fun updateTokens(tokenItem: TokenItem) {
+        return tokenDao.updateTokens(tokenItem)
+    }
 }
