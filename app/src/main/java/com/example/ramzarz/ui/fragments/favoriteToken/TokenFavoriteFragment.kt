@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ramzarz.R
 import com.example.ramzarz.databinding.FragmentFavoriteTokenBinding
-import com.example.ramzarz.databinding.FragmentTokenBinding
 import com.example.ramzarz.ui.MainActivity
 import com.example.ramzarz.ui.fragments.Token.TokenViewModel
 import com.example.ramzarz.ui.adapter.TokensAdapter
@@ -81,15 +79,14 @@ class TokenFavoriteFragment : Fragment() {
     }
     private fun displayTokens(){
 //        tokenViewModel.getTokens()
-        tokenFavoriteViewModel.favToken.observe(viewLifecycleOwner){ toktok->
-            if (toktok.isNotEmpty()){
-                tokensAdapter.differ.submitList(toktok)
+        tokenFavoriteViewModel.favToken.observe(viewLifecycleOwner){ tokTok->
+            if (tokTok.isNotEmpty()){
+                tokensAdapter.differ.submitList(tokTok)
             }else{
                 _binding.tv.visibility = View.VISIBLE
                 _binding.rlFavorite.visibility = View.GONE
             }
 
-            Log.d("TAG", "display: " + toktok )
         }
     }
 }

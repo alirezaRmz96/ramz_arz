@@ -6,17 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ramzarz.ui.MainActivity
 import com.example.ramzarz.R
-import com.example.ramzarz.data.until.Resource
-
 import com.example.ramzarz.databinding.FragmentTokenBinding
 import com.example.ramzarz.ui.adapter.TokensAdapter
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 class TokenFragment : Fragment() {
 
@@ -40,9 +36,9 @@ class TokenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTokenBinding.bind(view)
-        initRecyclerView()
-        tokenViewModel.getTokens()
 
+        tokenViewModel.getTokens()
+        initRecyclerView()
 
 
     }
@@ -88,7 +84,7 @@ class TokenFragment : Fragment() {
 
     private fun displayTokens(){
         _binding.progressBar.visibility = View.VISIBLE
-        tokenViewModel.getTokens()
+
 
         tokenViewModel.tokensLiveData.observe(viewLifecycleOwner){
             if (it!=null){

@@ -75,7 +75,7 @@ class DetailsFragment : Fragment() {
 
             tokens.yearD.let {
                 dxxx ->
-                if (dxxx?.price_change_pct!!.contains("-")){
+                if (dxxx.price_change_pct!!.contains("-")){
                     tvRangeYear.text = getString(R.string.range_neg,year)
                     tvRangeYear.setTextColor(Color.parseColor("#ED2020"))
                     ivRangeYear.setImageDrawable(
