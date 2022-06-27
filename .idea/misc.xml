@@ -5,8 +5,10 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_arrow_drop_up.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_star_border.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_up_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rectungle_shape.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15817356205852673" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.15817356205852673" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.23007246376811594" />
         <entry key="app/src/main/res/layout/fragment_favorite_token.xml" value="0.2463768115942029" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />

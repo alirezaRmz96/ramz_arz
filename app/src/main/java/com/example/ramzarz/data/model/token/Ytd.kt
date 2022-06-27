@@ -1,6 +1,6 @@
-package com.example.ramzarz.data.model
+package com.example.ramzarz.data.model.token
 
-data class D(
+data class Ytd(
     val market_cap_change: String?,
     val market_cap_change_pct: String?,
     val price_change: String?,

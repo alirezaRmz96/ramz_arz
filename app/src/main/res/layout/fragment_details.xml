@@ -2,18 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.fragments.details.DetailsFragment">
 
-    <ImageView
-        android:id="@+id/iv_btn"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:src="@drawable/down"
-        android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/btn_image"
-        android:padding="@dimen/_10sdp"/>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/detail_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/tv_btn">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/detail_collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.Toolbar.DetailTitle"
+            app:contentScrim="?attr/colorSurface"
+            android:background="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true"
+            app:toolbarId="@id/detail_toolbar">
+            <ImageView
+                android:id="@+id/iv_btn"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/down"
+                app:layout_collapseMode="parallax"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/btn_image"
+                android:padding="@dimen/_10sdp"/>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_up_button" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
     <TextView
         android:id="@+id/tv_btn"
         android:layout_width="wrap_content"
@@ -143,42 +175,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black" />
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/iv_range_week"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/up" />
-
-            <TextView
-                android:id="@+id/tv_range_week"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/iv_range_week"
-                android:text="@string/range"
-                android:textColor="#4CAF50"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:padding="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:layout_alignParentRight="true"
-                android:text="@string/week_range_title"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -207,11 +204,47 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="fill_horizontal"
+                android:padding="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="@string/month_range_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_range_year"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/up" />
+
+            <TextView
+                android:id="@+id/tv_range_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_range_year"
+                android:text="@string/range"
+                android:textColor="#4CAF50"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
                 android:padding="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:layout_alignParentRight="true"
-                android:text="@string/month_range_title"
+                android:text="@string/year_range_title"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />

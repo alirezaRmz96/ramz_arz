@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ramzarz.R
 import com.example.ramzarz.databinding.FragmentFavoriteTokenBinding
@@ -44,6 +45,13 @@ class TokenFavoriteFragment : Fragment() {
 
 
     }
+    override fun onResume() {
+        super.onResume()
+        if (requireActivity() is MainActivity) {
+            (activity as MainActivity?)!!.showBottomNavigationView()
+        }
+
+    }
     private fun initRecyclerView(){
         tokensAdapter = TokensAdapter()
         _binding.rlFavorite.apply {
@@ -55,6 +63,19 @@ class TokenFavoriteFragment : Fragment() {
             token.favoriteToken = !token.favoriteToken
             Log.d("TAG", "display in fav initRecyclerView: " + token.favoriteToken)
             tokenViewModel.update(token)
+        }
+        tokensAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("selected_token",it)
+            }
+            if (requireActivity() is MainActivity) {
+                (activity as MainActivity?)!!.hideBottomNavigationView()
+            }
+            findNavController().navigate(
+                R.id.action_navigation_favorite_to_detailsFragment,
+                bundle
+            )
+            Log.d("TAG", "display: id " + it.favoriteToken)
         }
         displayTokens()
     }

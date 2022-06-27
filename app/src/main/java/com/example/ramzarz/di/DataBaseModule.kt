@@ -19,7 +19,7 @@ class DataBaseModule {
         return Room.databaseBuilder(
             app,
             TokenRoomDataBase::class.java,
-            "token_table"
+            "tokens_table"
         )
         .fallbackToDestructiveMigration()
             .build()
