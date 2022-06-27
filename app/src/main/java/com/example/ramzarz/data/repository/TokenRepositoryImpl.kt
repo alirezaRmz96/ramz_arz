@@ -32,8 +32,6 @@ class TokenRepositoryImpl (
     override suspend fun update(tokenItem: TokensItem) {
 
         tokenLocalDataSource.updateTokens(tokenItem)
-        val newTokens = getTokenFromDB()
-        tokenLocalDataSource.saveTokenToDB(newTokens)
 
 
     }
