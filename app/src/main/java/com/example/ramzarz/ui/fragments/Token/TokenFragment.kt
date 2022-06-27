@@ -41,22 +41,21 @@ class TokenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTokenBinding.bind(view)
         initRecyclerView()
-//        tokenViewModel.getToken()
+        tokenViewModel.getTokens()
 
-//        tokenViewModel.tokenLiveData.observe(viewLifecycleOwner) { response ->
-//            when(response){
-//                is  Resource.Loading ->{}
-//                is Resource.Error ->{}
-//                is Resource.Success -> {
-//                    response.data?.let {
-//                        Log.d("TAG", "first time: " + it.size)
-//                    }
-//
-//                }
-//            }
-//        }
+
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (requireActivity() is MainActivity) {
+            (activity as MainActivity?)!!.showBottomNavigationView()
+        }
+
+
+    }
+
 
     private fun initRecyclerView(){
         tokensAdapter = TokensAdapter()
@@ -86,30 +85,10 @@ class TokenFragment : Fragment() {
         displayTokens()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (requireActivity() is MainActivity) {
-            (activity as MainActivity?)!!.showBottomNavigationView()
-        }
-
-    }
 
     private fun displayTokens(){
         _binding.progressBar.visibility = View.VISIBLE
         tokenViewModel.getTokens()
-//        val response = tokenViewModel.getTok()
-//        response.observe(viewLifecycleOwner){
-//            if (it!=null){
-//                Log.d("TAG", "display Tokens: " + it.size)
-//                _binding.progressBar.visibility = View.GONE
-//                Toast.makeText(activity,"show right",Toast.LENGTH_SHORT).show()
-//                tokensAdapter.differ.submitList(it)
-//            }
-//            else{
-//                Toast.makeText(activity,"show not",Toast.LENGTH_SHORT).show()
-//                _binding.progressBar.visibility = View.GONE
-//            }
-//        }
 
         tokenViewModel.tokensLiveData.observe(viewLifecycleOwner){
             if (it!=null){

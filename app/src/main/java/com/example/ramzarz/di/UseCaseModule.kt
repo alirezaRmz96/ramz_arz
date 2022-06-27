@@ -15,7 +15,6 @@ class UseCaseModule {
     @Provides
     fun provideTokenUseCase(repository: TokenRepository):TokenUseCase{
         return TokenUseCase(
-            getTokenUseCase = GetTokenUseCase(repository),
             getTokensUseCase = GetTokensUseCase(repository),
             updateTokenUseCase = UpdateTokenUseCase(repository),
             getFavoriteTokenUseCase = GetFavoriteTokenUseCase(repository),

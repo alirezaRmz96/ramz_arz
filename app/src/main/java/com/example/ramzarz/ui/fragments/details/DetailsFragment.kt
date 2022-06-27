@@ -2,11 +2,13 @@ package com.example.ramzarz.ui.fragments.details
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.ramzarz.R
@@ -27,19 +29,30 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailsBinding.bind(view)
         val args: DetailsFragmentArgs by navArgs()
-        val token = args.selectedToken
+
+        val tokens = args.selectedToken
 
         _binding.apply {
             Glide.with(ivBtn.context)
-                .load(token.logo_url)
+                .load(tokens.logo_url)
                 .into(ivBtn)
-            tvBtn.text = token.name
-            tvBazarD.text = getString(R.string.price_bazar,token.price)
+            tvBtn.text = tokens.name
+            tvBazarD.text = getString(R.string.price_bazar,tokens.price)
+            detailToolbar.setNavigationOnClickListener { v->
+                Navigation.findNavController(v).navigateUp()
+            }
+            val day = tokens.oneD?.price_change_pct!!.toDouble() * 100
 
-            token.oneD.let {
+            val year = tokens.yearD?.price_change_pct!!.toDouble() * 100
+            Log.d("TAG", "show me: " + year)
+
+            val month = tokens.monthD?.price_change_pct!!.toDouble() * 100
+
+            Log.d("TAG1", "onViewCreated: $day")
+            tokens.oneD.let {
                 d ->
-                if (d!!.price_change_pct!!.contains("-")){
-                    tvRangeDay.text = getString(R.string.range_neg, token.oneD?.price_change_pct)
+                if (d.price_change_pct!!.contains("-")){
+                    tvRangeDay.text = getString(R.string.range_neg, day)
                     tvRangeDay.setTextColor(Color.parseColor("#ED2020"))
                     ivRangeDay.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -49,7 +62,7 @@ class DetailsFragment : Fragment() {
                     )
                 }
                 else{
-                    tvRangeDay.text = getString(R.string.range, token.oneD?.price_change_pct)
+                    tvRangeDay.text = getString(R.string.range, day)
                     tvRangeDay.setTextColor(Color.parseColor("#4CAF50"))
                     ivRangeDay.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -60,34 +73,34 @@ class DetailsFragment : Fragment() {
                 }
             }
 
-            token.weekD.let {
+            tokens.yearD.let {
                 dxxx ->
-                if (dxxx!!.price_change_pct!!.contains("-")){
-                    tvRangeWeek.text = getString(R.string.range_neg, token.weekD?.price_change_pct)
-                    tvRangeWeek.setTextColor(Color.parseColor("#ED2020"))
-                    ivRangeWeek.setImageDrawable(
+                if (dxxx?.price_change_pct!!.contains("-")){
+                    tvRangeYear.text = getString(R.string.range_neg,year)
+                    tvRangeYear.setTextColor(Color.parseColor("#ED2020"))
+                    ivRangeYear.setImageDrawable(
                         ContextCompat.getDrawable(
-                            ivRangeWeek.context,
+                            ivRangeYear.context,
                             R.drawable.down
                         )
                     )
                 }
                 else{
-                    tvRangeWeek.text = getString(R.string.range, token.weekD?.price_change_pct)
-                    tvRangeWeek.setTextColor(Color.parseColor("#4CAF50"))
-                    ivRangeWeek.setImageDrawable(
+                    tvRangeYear.text = getString(R.string.range, year)
+                    tvRangeYear.setTextColor(Color.parseColor("#4CAF50"))
+                    ivRangeYear.setImageDrawable(
                         ContextCompat.getDrawable(
-                            ivRangeWeek.context,
+                            ivRangeYear.context,
                             R.drawable.up
                         )
                     )
                 }
             }
 
-            token.monthD.let {
+            tokens.monthD.let {
                 dx ->
-                if (dx!!.price_change_pct!!.contains("-")){
-                    tvRangeMonth.text = getString(R.string.range_neg, token.monthD?.price_change_pct)
+                if (dx.price_change_pct!!.contains("-")){
+                    tvRangeMonth.text = getString(R.string.range_neg, month)
                     tvRangeMonth.setTextColor(Color.parseColor("#ED2020"))
                     ivRangeMonth.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -97,7 +110,7 @@ class DetailsFragment : Fragment() {
                     )
                 }
                 else{
-                    tvRangeMonth.text = getString(R.string.range, token.monthD?.price_change_pct)
+                    tvRangeMonth.text = getString(R.string.range, month)
                     tvRangeMonth.setTextColor(Color.parseColor("#4CAF50"))
                     ivRangeMonth.setImageDrawable(
                         ContextCompat.getDrawable(

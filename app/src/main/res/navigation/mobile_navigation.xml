@@ -12,7 +12,12 @@
         tools:layout="@layout/fragment_favorite_token" >
         <action
             android:id="@+id/action_navigation_favorite_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
     </fragment>
 
 
@@ -24,7 +29,12 @@
         tools:layout="@layout/fragment_token" >
         <action
             android:id="@+id/action_navigation_token_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -32,8 +42,9 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
 
+
         <argument
             android:name="selected_token"
-            app:argType="com.example.ramzarz.data.model.TokenItem" />
+            app:argType="com.example.ramzarz.data.model.token.TokensItem" />
     </fragment>
 </navigation>

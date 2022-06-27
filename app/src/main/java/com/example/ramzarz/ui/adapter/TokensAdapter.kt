@@ -1,29 +1,32 @@
 package com.example.ramzarz.ui.adapter
 
-import android.annotation.SuppressLint
+import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ramzarz.R
-import com.example.ramzarz.data.model.TokenItem
+import com.example.ramzarz.data.model.token.TokensItem
 import com.example.ramzarz.databinding.TokenItemBinding
-import java.text.SimpleDateFormat
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.coroutines.coroutineContext
 
 class TokensAdapter(
     ) : RecyclerView.Adapter<TokensAdapter.TokensViewHolder>() {
 
-    private val callback = object :DiffUtil.ItemCallback<TokenItem>(){
-        override fun areItemsTheSame(oldItem: TokenItem, newItem: TokenItem): Boolean {
+    private val callback = object :DiffUtil.ItemCallback<TokensItem>(){
+        override fun areItemsTheSame(oldItem: TokensItem, newItem: TokensItem): Boolean {
             return oldItem.currency == newItem.currency
         }
 
-        override fun areContentsTheSame(oldItem: TokenItem, newItem: TokenItem): Boolean {
+        override fun areContentsTheSame(oldItem: TokensItem, newItem: TokensItem): Boolean {
             return oldItem == newItem
         }
 
@@ -35,6 +38,7 @@ class TokensAdapter(
         return TokensViewHolder(binding)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TokensViewHolder, position: Int) {
         val tokens = differ.currentList[position]
         holder.bind(tokens)
@@ -48,18 +52,48 @@ class TokensAdapter(
     inner class TokensViewHolder(
         private val binding:TokenItemBinding
     ):RecyclerView.ViewHolder(binding.root){
-        val sdf = SimpleDateFormat("hh:mm:ss")
-        val currentDate = sdf.format(Date())
-        @SuppressLint("StringFormatInvalid")
-        fun bind(tokens:TokenItem){
 
-            binding.tokenPerPrice.text = binding.root.context.getString(R.string.range_per_dominance,tokens.market_cap_dominance)
-            binding.txtBit.text = tokens.name
-            binding.timeStamp.text = currentDate
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun bind(tokens:TokensItem){
 
             Glide.with(binding.imgBit.context)
                 .load(tokens.logo_url)
                 .into(binding.imgBit)
+
+            var dateTime = ZonedDateTime.parse(tokens.price_date)
+
+            binding.tokenPerPrice.text = binding.root.context.getString(R.string.range_per_dominance,tokens.market_cap_dominance?.toDouble())
+            binding.txtBit.text = tokens.name
+            binding.txtDollar.text = binding.root.context.getString(R.string.today_dollar,tokens.price?.toDouble())
+            binding.timeStamp.text = dateTime.withZoneSameInstant(ZoneId.of("UTC")).format(
+                DateTimeFormatter.ofPattern("hh:mm:ss a")
+            )
+
+            val day = tokens.oneD?.price_change_pct!!.toDouble() * 100
+
+            tokens.oneD.let {
+                    d ->
+                if (d.price_change_pct!!.contains("-")){
+                    binding.tokenPerPrice.text = binding.root.context.getString(R.string.range_neg_main, day)
+                    binding.tokenPerPrice.setTextColor(Color.parseColor("#ED2020"))
+                    binding.deOrIn.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            binding.deOrIn.context,
+                            R.drawable.down
+                        )
+                    )
+                }
+                else{
+                    binding.tokenPerPrice.text = binding.root.context.getString(R.string.range_main, day)
+                    binding.tokenPerPrice.setTextColor(Color.parseColor("#4CAF50"))
+                    binding.deOrIn.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            binding.deOrIn.context,
+                            R.drawable.up
+                        )
+                    )
+                }
+            }
 
             if (tokens.favoriteToken){
                 binding.favorite.setImageDrawable(
@@ -105,12 +139,12 @@ class TokensAdapter(
         }
     }
 
-    private var onItemClickListenerForFav: ((TokenItem) -> Unit)? = null
-    fun setOnItemClickListenerForFav(listener: (TokenItem) -> Unit) {
+    private var onItemClickListenerForFav: ((TokensItem) -> Unit)? = null
+    fun setOnItemClickListenerForFav(listener: (TokensItem) -> Unit) {
         onItemClickListenerForFav = listener
     }
-    private var onItemClickListener: ((TokenItem) -> Unit)? = null
-    fun setOnItemClickListener(listener: (TokenItem) -> Unit) {
+    private var onItemClickListener: ((TokensItem) -> Unit)? = null
+    fun setOnItemClickListener(listener: (TokensItem) -> Unit) {
         onItemClickListener = listener
     }
 
