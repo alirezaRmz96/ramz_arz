@@ -16,7 +16,7 @@ import com.example.ramzarz.databinding.TokenItemBinding
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
+
 
 class TokensAdapter(
     ) : RecyclerView.Adapter<TokensAdapter.TokensViewHolder>() {
@@ -102,7 +102,8 @@ class TokensAdapter(
                         R.drawable.ic_star_24
                     )
                 )
-            } else{
+            }
+            else{
                 binding.favorite.setImageDrawable(
                     ContextCompat.getDrawable(
                         binding.favorite.context,
@@ -110,6 +111,7 @@ class TokensAdapter(
                     )
                 )
             }
+
             binding.favorite.setOnClickListener{
                 onItemClickListenerForFav?.let {
                     //tokens.favoriteToken != tokens.favoriteToken
